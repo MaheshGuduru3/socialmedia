@@ -2,12 +2,14 @@ const express = require('express')
 const app = express()
 const dotenv = require('dotenv').config()
 const connectToDB = require('./database/db')
-
+const allApis = require('./routes/route')
 
 
 // Connecting to the database.
 connectToDB()
 
+app.use(express.json())
+app.use('/api' , allApis)
 
 app.get('/' , (req,res)=>{
        res.send("Hello welcome..")
