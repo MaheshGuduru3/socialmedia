@@ -1,5 +1,8 @@
+const { tokenGenerate } = require('../middleware/tokenGenerate');
 const user = require('../model/userSchema')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+
 
 const userSignUp = async (req,res)=>{
 
@@ -37,6 +40,7 @@ const userSignUp = async (req,res)=>{
 
 
 const userSignIn = async (req,res)=>{
+
       const { email , phonenumber, password} = req.body
 
       if((!email && !password) || (!phonenumber && !password)){
@@ -48,7 +52,12 @@ const userSignIn = async (req,res)=>{
           const result = await user.findOne({ $or : [{email} , {phonenumber}]})
           if(result){
               if(bcrypt.compare(password , result.password)){
-                 return res.status(200).json({message:"Logged"})
+                 
+                  const receviedToken = tokenGenerate(result.id)
+              
+                   res.cookie("jwtsocial", receviedToken, {
+
+                  })   
               }
               else{
                 return res.status(401).json({message:"Invalid email/phonenumber or password"})
@@ -63,8 +72,42 @@ const userSignIn = async (req,res)=>{
       }
 }
 
+const verifyToken = async (req,res,next)=>{
+      console.log("vchg")
+      const token = req.cookies.jwtsocial   
+      console.log(token)
+      try{
+            const verifed  = await jwt.verify(token , process.env.JWT_SECERT)
+            req.id = verifed.id,
+            next()
+      }
+      catch(err){
+          return res.status(500).json({message:err.message})
+      }
+}
+
+const userDetails = async(req,res)=>{
+       console.log("gtvh")
+        const id = req.id;    
+   
+        try{
+              const result = await user.findById(id)
+              if(result){
+                   return res.status(201).json({message:"Logged"})
+              }
+              else{
+                  return res.status(404).json({message:"Not Found"})
+              }
+        }
+        catch(err){
+            return res.status(500).json({message:err.message})
+        }
+}
+
 
 module.exports = {
       userSignUp,
-      userSignIn
+      userSignIn,
+      verifyToken,
+      userDetails
 }

@@ -1,4 +1,4 @@
-const { userSignUp, userSignIn } = require('../controllers/userController')
+const { userSignUp, userSignIn, verifyToken, userDetails } = require('../controllers/userController')
 
 const route = require('express').Router()
 
@@ -7,7 +7,7 @@ route.get('/' , (req,res)=>{
 })
 
 route.post('/signup' , userSignUp)
-route.get('/signin' , userSignIn)
-
+route.post('/signin' , userSignIn)
+route.get('/user' , verifyToken , userDetails)
 
 module.exports = route
