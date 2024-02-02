@@ -24,10 +24,10 @@ const SignIn = () => {
   return (
     <div className='w-full'>
         <div className='w-full h-screen flex justify-center items-center'>
-             <div className='w-[25rem] shadow-2xl min-h-[20rem]'>
+             <div className='w-[25rem] shadow-2xl min-h-[20rem] border border-double'>
                   <div className='w-full flex flex-col items-center'>
                         <div>
-                            <h1 className='text-2xl font-bold italic p-4'>Indigram</h1>
+                            <h1 className='text-2xl font-bold italic p-4 bg-gradient-to-r from-red-400 via-orange-500  text-transparent bg-clip-text'>Indigram</h1>
                         </div>
                         <div className='w-full p-5'>
                            <form onSubmit={handleSubmit}> 
@@ -48,6 +48,9 @@ const SignIn = () => {
                                      }
                                    </div>
                                   { errors && errors.password  && <span className='text-red-500'>{errors.password}</span>}
+                                </div>
+                                <div className='flex justify-center'>
+                                  <NavLink className='text-blue-500'>Forget Password?</NavLink>
                                 </div>
                                 <div className='text-center p-2'>
                                   <button className='text-md bg-blue-600 p-1 text-white font-extralight px-2'>SignIn</button> 

@@ -31,10 +31,10 @@ const SignUp = () => {
   return (
     <div className='w-full'>
         <div className='w-full h-screen flex justify-center items-center'>
-             <div className='w-[25rem] shadow-2xl min-h-[25rem]'>
+             <div className='w-[25rem] shadow-2xl min-h-[25rem] border border-double'>
                   <div className='w-full flex flex-col items-center'>
                         <div>
-                            <h1 className='text-2xl font-bold italic p-4'>Indigram</h1>
+                            <h1 className='text-2xl font-bold italic p-4 bg-gradient-to-r from-red-400 via-orange-500  text-transparent bg-clip-text'>Indigram</h1>
                         </div>
                         <div className='w-full p-5'>
                            <form onSubmit={handleSubmit}> 

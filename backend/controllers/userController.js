@@ -53,11 +53,13 @@ const userSignIn = async (req,res)=>{
           if(result){
               if(bcrypt.compare(password , result.password)){
                  
-                  const receviedToken = tokenGenerate(result.id)
+                  // const receviedToken = tokenGenerate(result.id)
+                  const token = jwt.sign({id : result._id } , process.env.JWT_SECERT, {
+                    expiresIn:'1h',
+                   })
+                  
+                  res.cookie("token",token)
               
-                   res.cookie("jwtsocial", receviedToken, {
-
-                  })   
               }
               else{
                 return res.status(401).json({message:"Invalid email/phonenumber or password"})
@@ -72,22 +74,22 @@ const userSignIn = async (req,res)=>{
       }
 }
 
-const verifyToken = async (req,res,next)=>{
-      console.log("vchg")
-      const token = req.cookies.jwtsocial   
-      console.log(token)
+const verifyToken = async (req,res,next)=>{  
+      const token = req.cookies.token
+
+      console.log(token) 
       try{
             const verifed  = await jwt.verify(token , process.env.JWT_SECERT)
             req.id = verifed.id,
             next()
       }
       catch(err){
-          return res.status(500).json({message:err.message})
+          console.log(err)
+          return res.status(500).json({message:err}) 
       }
 }
 
 const userDetails = async(req,res)=>{
-       console.log("gtvh")
         const id = req.id;    
    
         try{

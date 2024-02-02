@@ -9,12 +9,15 @@ const allApis = require('./routes/route')
 // Connecting to the database.
 connectToDB()
 
-app.use(cookieParser()) 
+app.use(cookieParser())
 
 app.use(express.json())
+
 app.use('/api' , allApis)
 
 app.get('/' , (req,res)=>{
+
+       res.cookie('name', 'tutorialsPoint')
        res.send("Hello welcome..")
 })
 
