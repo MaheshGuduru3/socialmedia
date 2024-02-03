@@ -1,9 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes , Navigate} from "react-router-dom";
 import Header from './components/header/Header'
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
+import { useEffect } from "react";
 
 const  App = ()=>{
+  
+  useEffect(()=>{
+ 
+      
+  },[])
   return (
     <div className="w-full">
           <BrowserRouter>
@@ -11,7 +17,7 @@ const  App = ()=>{
                <Route path="/signin" element={<SignIn />}></Route>
                <Route path="/signup" element={<SignUp />}></Route>
                <Route path="/"  element={<Header />}>    
-                      
+              
                </Route>
             </Routes>
           </BrowserRouter>

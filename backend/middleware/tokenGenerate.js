@@ -5,7 +5,7 @@ const tokenGenerate = (id) => {
             const token = jwt.sign({id} , process.env.JWT_SECERT, {
                   expiresIn:'1h',
             })
-       
+            
             return token;
       }
       catch(err){

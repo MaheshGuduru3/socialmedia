@@ -1,12 +1,13 @@
 import React from 'react'
-import { useGetHealthQuery } from '../../features/user/userApi'
+import { useGetCheckingQuery } from '../../features/user/userApi'
+
 
 
 const Header = () => {
 
-   const { data } = useGetHealthQuery()
-   
-   console.log(data)
+    const { data } = useGetCheckingQuery()
+    console.log(data)  
+  
 
   return (
     <div className='w-full'>

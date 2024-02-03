@@ -53,12 +53,14 @@ const userSignIn = async (req,res)=>{
           if(result){
               if(bcrypt.compare(password , result.password)){
                  
-                  // const receviedToken = tokenGenerate(result.id)
-                  const token = jwt.sign({id : result._id } , process.env.JWT_SECERT, {
-                    expiresIn:'1h',
-                   })
-                  
-                  res.cookie("token",token)
+                  const receviedToken = tokenGenerate(result.id)
+
+                  res.cookie('jwtsocial' , receviedToken , {
+                       domain : "localhost"
+                  })
+
+                   return res.status(201).json({message:'success'})
+                
               
               }
               else{
@@ -74,12 +76,13 @@ const userSignIn = async (req,res)=>{
       }
 }
 
-const verifyToken = async (req,res,next)=>{  
-      const token = req.cookies.token
+const verifyToken =  (req,res,next)=>{  
+      // const token = req.headers.authorization.split(" ")[1]
+      const token = req.cookies.jwtsocial
 
       console.log(token) 
       try{
-            const verifed  = await jwt.verify(token , process.env.JWT_SECERT)
+            const verifed  = jwt.verify(token , process.env.JWT_SECERT)
             req.id = verifed.id,
             next()
       }

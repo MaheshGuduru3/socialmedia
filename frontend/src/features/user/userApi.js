@@ -1,19 +1,18 @@
 import { apiSlice } from "../api/apiSlice";
 
 
-
-
 const userApi = apiSlice.injectEndpoints({
-        endpoints : builders=>({
-              getAllUsers : builders.query({
-                     query:()=>'/',
-                 }),
-        })  
-   
-})     
-    
+         endpoints : builders=>({
+                getChecking : builders.query({
+                       query : ()=>({
+                            url:'/'
+                       })
+                })
+         })
+})
 
-export const {     }  = userApi
- 
+
+
+export const { useGetCheckingQuery } = userApi
 
 export default userApi
