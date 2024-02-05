@@ -4,8 +4,11 @@ import { formValid } from '../validation/formValid'
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { NavLink} from 'react-router-dom'
+import { useAddUserMutation } from '../../features/user/userApi';
 
 const SignUp = () => {
+
+  const [addUser] = useAddUserMutation()
   
   const initialState = {
          email:"", 
@@ -18,8 +21,17 @@ const SignUp = () => {
     const { errors , values , handleChange, handleSubmit } = useFormik({
             initialValues:initialState,
             validationSchema:formValid, 
-            onSubmit : (data)=>{
-                console.log(data)
+            onSubmit : async(data)=>{
+                 try{
+                   const result = await addUser(data).unwrap()
+                   console.log(result)
+                   if(result.status === 201){
+                         console.log("created")
+                   }
+                 }
+                 catch(err){
+                    console.log(err)
+                 }
             }
     })
 

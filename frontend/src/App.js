@@ -3,6 +3,7 @@ import Header from './components/header/Header'
 import SignIn from "./components/pages/SignIn";
 import SignUp from "./components/pages/SignUp";
 import { useEffect } from "react";
+import Home from "./components/Home";
 
 const  App = ()=>{
   
@@ -17,7 +18,7 @@ const  App = ()=>{
                <Route path="/signin" element={<SignIn />}></Route>
                <Route path="/signup" element={<SignUp />}></Route>
                <Route path="/"  element={<Header />}>    
-              
+                  <Route path="/" element={<Home />} />
                </Route>
             </Routes>
           </BrowserRouter>

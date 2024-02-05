@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useGetUserMutation } from '../../features/user/userApi';
 
 const SignIn = () => {
+
+  const [signInUser]  = useGetUserMutation()
+  const navigate = useNavigate()
   
   const initialState = {
          email:"",
@@ -13,8 +17,18 @@ const SignIn = () => {
  
     const { errors , values , handleChange, handleSubmit } = useFormik({
             initialValues:initialState,
-            onSubmit : (data)=>{
-                console.log(data)
+            onSubmit : async(data)=>{
+                   try{
+                        const result  = await signInUser(data).unwrap()
+                        console.log(result)
+                        navigate('/')
+                        if(result.message === "success"){
+                             
+                        }
+                   }
+                   catch(err){
+                        console.log(err)
+                   }
             }
     })
 

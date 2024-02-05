@@ -1,5 +1,6 @@
 import React from 'react'
-import { useGetCheckingQuery } from '../../features/user/userApi'
+import { useGetCheckingQuery, useGetUserVerifyQuery } from '../../features/user/userApi'
+import { Outlet } from 'react-router-dom'
 
 
 
@@ -7,6 +8,9 @@ const Header = () => {
 
     const { data } = useGetCheckingQuery()
     console.log(data)  
+
+    const { data:data1 , error} = useGetUserVerifyQuery()
+    console.log(data1 , error)     
   
 
   return (
@@ -15,8 +19,10 @@ const Header = () => {
               <div className='max-w-[96rem] m-auto'>
                      <div className='w-full p-3 shadow-xl'>
                           <h3 className='text-2xl font-bold  italic bg-gradient-to-r from-red-400 via-orange-500  text-transparent bg-clip-text'>Indigram</h3>
+                           {data1?.message}
                      </div>
               </div>
+              <Outlet />
         </div>
     </div>
   )

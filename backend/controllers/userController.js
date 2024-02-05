@@ -56,7 +56,8 @@ const userSignIn = async (req,res)=>{
                   const receviedToken = tokenGenerate(result.id)
 
                   res.cookie('jwtsocial' , receviedToken , {
-                       domain : "localhost"
+                       domain : "localhost",
+                       maxAge : 60 * 1000
                   })
 
                    return res.status(201).json({message:'success'})
@@ -76,19 +77,16 @@ const userSignIn = async (req,res)=>{
       }
 }
 
-const verifyToken =  (req,res,next)=>{  
-      // const token = req.headers.authorization.split(" ")[1]
-      const token = req.cookies.jwtsocial
-
-      console.log(token) 
+const verifyToken =  (req,res,next)=>{   
+      const token = req.cookies?.jwtsocial 
       try{
             const verifed  = jwt.verify(token , process.env.JWT_SECERT)
+            console.log(verifed)
             req.id = verifed.id,
             next()
       }
       catch(err){
-          console.log(err)
-          return res.status(500).json({message:err}) 
+          res.status(500).json({message:err.message}) 
       }
 }
 
