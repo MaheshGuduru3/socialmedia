@@ -9,13 +9,13 @@ const Feed = () => {
   return (
     <div className='w-full'>
        <div className='p-3'>
-           <div className='w-full  h-32'>
-               <img   src={log} className=' w-20 h-20 rounded-full'/>
-               <h4>Mystory</h4>
+           <div className='w-full  h-28'>
+               <img   src={log} className=' w-16 h-16 rounded-full'/>
+               <h4 className='ms-1'>Mystory</h4>
            </div>
            <div className='w-full'>
-               <div className='w-full shadow-2xl'>
-                     <div className='flex  justify-between'>
+               <div className='w-full shadow-lg border b-2'>
+                     <div className='h-[4.5rem] flex  justify-between'>
                         <div className='flex gap-2 p-2'>
                             <img  src={log} className='w-12 h-12 rounded-full'/>
                             <div className='h-12'>
@@ -24,7 +24,7 @@ const Feed = () => {
                                 <h6 className='text-xs  h-5  font-light'>1hr</h6>
                             </div>
                          </div>
-                         <button className='text-2xl'>
+                         <button className='h-12 text-2xl'>
                             <BiDotsVerticalRounded />
                          </button>
                      </div>

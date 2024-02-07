@@ -8,6 +8,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { NavLink } from 'react-router-dom'
 
 const LeftSide = () => {
+
     const arr = [
         {
             id : 0,
@@ -47,11 +48,11 @@ const LeftSide = () => {
         },
     ]
   return (
-    <div className='w-full fixed'>  
-        <div className='p-5 flex flex-col gap-5'> 
+    <div className='w-[15rem] fixed'>  
+        <div className='p-5 flex flex-col gap-3'> 
              {
                 arr.map((res)=>(
-                    <NavLink  to={res.link} className='flex gap-2'> 
+                    <NavLink  to={res.link} className={res.text === "Home" ?'flex gap-2 bg-slate-100 hover:bg-slate-100 px-2 py-2' :'flex gap-2 hover:bg-slate-100 px-2 py-2'}> 
                         <button className='text-2xl'>{res.icon}</button>
                         <h2 className='text-xl'>{res.text}</h2>
                     </NavLink>
